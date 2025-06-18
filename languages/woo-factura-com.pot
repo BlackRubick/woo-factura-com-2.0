@@ -1,0 +1,1531 @@
+# Copyright (C) 2024 WooCommerce Factura.com
+# This file is distributed under the same license as the WooCommerce Factura.com package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Factura.com 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/tu-usuario/woo-factura-com/issues\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-01-15T10:00:00+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.8.1\n"
+"X-Domain: woo-factura-com\n"
+
+#. Plugin Name of the plugin
+msgid "WooCommerce Factura.com"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://github.com/tu-usuario/woo-factura-com"
+msgstr ""
+
+#. Description of the plugin
+msgid "Integración completa con Factura.com para generar CFDIs automáticamente en WooCommerce. Incluye validación de RFC, generación automática de facturas, cancelación de CFDIs y más."
+msgstr ""
+
+#. Author of the plugin
+msgid "Tu Nombre"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://tu-sitio.com"
+msgstr ""
+
+#: woo-factura-com.php:89
+msgid "WooCommerce Factura.com:"
+msgstr ""
+
+#: woo-factura-com.php:90
+msgid "Este plugin requiere WooCommerce para funcionar."
+msgstr ""
+
+#: woo-factura-com.php:98
+msgid "Este plugin requiere PHP 7.4 o superior. Tu versión: %s"
+msgstr ""
+
+#: woo-factura-com.php:107
+msgid "Extensión de PHP requerida no encontrada: %s"
+msgstr ""
+
+#: woo-factura-com.php:124
+msgid "¡Bienvenido a WooCommerce Factura.com!"
+msgstr ""
+
+#: woo-factura-com.php:125
+msgid "Para comenzar a generar CFDIs, ejecuta el asistente de configuración."
+msgstr ""
+
+#: woo-factura-com.php:129
+msgid "Ejecutar configuración"
+msgstr ""
+
+#: woo-factura-com.php:132
+msgid "Ocultar aviso"
+msgstr ""
+
+#: woo-factura-com.php:155
+msgid "Configuración"
+msgstr ""
+
+#: woo-factura-com.php:160
+msgid "Configurar"
+msgstr ""
+
+#: woo-factura-com.php:169
+msgid "Documentación"
+msgstr ""
+
+#: woo-factura-com.php:170
+msgid "Soporte"
+msgstr ""
+
+#: woo-factura-com.php:171
+msgid "Factura.com"
+msgstr ""
+
+#: woo-factura-com.php:184
+msgid "No se puede activar el plugin debido a dependencias faltantes."
+msgstr ""
+
+#: includes/class-hooks.php:156
+msgid "Factura.com"
+msgstr ""
+
+#: includes/class-hooks.php:164
+msgid "Logs Factura.com"
+msgstr ""
+
+#: includes/class-hooks.php:172
+msgid "Estadísticas CFDI"
+msgstr ""
+
+#: includes/class-hooks.php:272
+msgid "RFC"
+msgstr ""
+
+#: includes/class-hooks.php:273
+msgid "RFC (opcional)"
+msgstr ""
+
+#: includes/class-hooks.php:282
+msgid "Formato: 4 letras + 6 números + 3 caracteres"
+msgstr ""
+
+#: includes/class-hooks.php:293
+msgid "El RFC es obligatorio."
+msgstr ""
+
+#: includes/class-hooks.php:298
+msgid "El RFC ingresado no es válido."
+msgstr ""
+
+#: includes/class-hooks.php:324
+msgid "CFDI - Factura.com"
+msgstr ""
+
+#: includes/class-hooks.php:354
+msgid "CFDI"
+msgstr ""
+
+#: includes/class-hooks.php:380
+msgid "Cancelado"
+msgstr ""
+
+#: includes/class-hooks.php:384
+msgid "Demo"
+msgstr ""
+
+#: includes/class-hooks.php:384
+msgid "Generado"
+msgstr ""
+
+#: includes/class-hooks.php:386
+msgid "Sin CFDI"
+msgstr ""
+
+#: includes/class-hooks.php:397
+msgid "No tienes permisos para generar CFDIs."
+msgstr ""
+
+#: includes/class-hooks.php:410
+msgid "No tienes permisos para cancelar CFDIs."
+msgstr ""
+
+#: includes/class-hooks.php:424
+msgid "No tienes permisos para regenerar CFDIs."
+msgstr ""
+
+#: includes/class-hooks.php:437
+msgid "No tienes permisos para probar la conexión."
+msgstr ""
+
+#: includes/class-hooks.php:449
+msgid "RFC válido"
+msgstr ""
+
+#: includes/class-hooks.php:449
+msgid "RFC inválido"
+msgstr ""
+
+#: includes/class-hooks.php:566
+msgid "Error de conexión con Factura.com"
+msgstr ""
+
+#: includes/class-hooks.php:569
+msgid "Se detectó un problema con la conexión a la API de Factura.com en tu sitio web %s."
+msgstr ""
+
+#: includes/class-hooks.php:572
+msgid "Error:"
+msgstr ""
+
+#: includes/class-hooks.php:573
+msgid "Por favor revisa la configuración en:"
+msgstr ""
+
+#: includes/class-hooks.php:610
+msgid "WooCommerce Factura.com:"
+msgstr ""
+
+#: includes/class-hooks.php:611
+msgid "El plugin no está configurado. Ejecuta el asistente para comenzar."
+msgstr ""
+
+#: includes/class-hooks.php:613
+msgid "Configurar ahora"
+msgstr ""
+
+#: includes/class-hooks.php:628
+msgid "WooCommerce Factura.com:"
+msgstr ""
+
+#: includes/class-hooks.php:629
+msgid "Está en modo demo. Los CFDIs generados no tendrán validez fiscal."
+msgstr ""
+
+#: includes/class-hooks.php:631
+msgid "Configurar modo real"
+msgstr ""
+
+#: includes/class-setup-wizard.php:31
+msgid "Bienvenida"
+msgstr ""
+
+#: includes/class-setup-wizard.php:35
+msgid "Entorno"
+msgstr ""
+
+#: includes/class-setup-wizard.php:39
+msgid "Credenciales"
+msgstr ""
+
+#: includes/class-setup-wizard.php:43
+msgid "Configuración Fiscal"
+msgstr ""
+
+#: includes/class-setup-wizard.php:47
+msgid "Prueba"
+msgstr ""
+
+#: includes/class-setup-wizard.php:51
+msgid "Completado"
+msgstr ""
+
+#: includes/class-setup-wizard.php:60
+msgid "Configurar Factura.com"
+msgstr ""
+
+#: includes/class-setup-wizard.php:119
+msgid "Configuración de Factura.com"
+msgstr ""
+
+#: includes/class-setup-wizard.php:120
+msgid "Te guiaremos paso a paso para configurar tu integración con Factura.com"
+msgstr ""
+
+#: includes/class-setup-wizard.php:129
+msgid "Anterior"
+msgstr ""
+
+#: includes/class-setup-wizard.php:139
+msgid "Ir a Configuración"
+msgstr ""
+
+#: includes/class-setup-wizard.php:141
+msgid "Probar Configuración"
+msgstr ""
+
+#: includes/class-setup-wizard.php:143
+msgid "Continuar"
+msgstr ""
+
+#: includes/class-setup-wizard.php:148
+msgid "Saltar configuración"
+msgstr ""
+
+#: includes/class-setup-wizard.php:168
+msgid "¡Bienvenido a Factura.com!"
+msgstr ""
+
+#: includes/class-setup-wizard.php:170
+msgid "Este asistente te ayudará a configurar la integración con Factura.com para generar CFDIs automáticamente en tu tienda WooCommerce."
+msgstr ""
+
+#: includes/class-setup-wizard.php:173
+msgid "¿Qué puedes hacer con este plugin?"
+msgstr ""
+
+#: includes/class-setup-wizard.php:175
+msgid "Generar CFDIs automáticamente cuando se completa un pedido"
+msgstr ""
+
+#: includes/class-setup-wizard.php:176
+msgid "Validar RFC de clientes en tiempo real"
+msgstr ""
+
+#: includes/class-setup-wizard.php:177
+msgid "Enviar facturas por email automáticamente"
+msgstr ""
+
+#: includes/class-setup-wizard.php:178
+msgid "Cancelar y regenerar CFDIs desde el admin"
+msgstr ""
+
+#: includes/class-setup-wizard.php:179
+msgid "Configuración completa según catálogos del SAT"
+msgstr ""
+
+#: includes/class-setup-wizard.php:180
+msgid "Modo demo para pruebas sin consumir API"
+msgstr ""
+
+#: includes/class-setup-wizard.php:184
+msgid "Antes de comenzar"
+msgstr ""
+
+#: includes/class-setup-wizard.php:185
+msgid "Asegúrate de tener:"
+msgstr ""
+
+#: includes/class-setup-wizard.php:187
+msgid "Una cuenta en Factura.com (o sandbox para pruebas)"
+msgstr ""
+
+#: includes/class-setup-wizard.php:188
+msgid "Tus credenciales API (F-Api-Key y F-Secret-Key)"
+msgstr ""
+
+#: includes/class-setup-wizard.php:189
+msgid "Una serie configurada en tu cuenta de Factura.com"
+msgstr ""
+
+#: includes/class-setup-wizard.php:199
+msgid "Selecciona tu entorno de trabajo"
+msgstr ""
+
+#: includes/class-setup-wizard.php:204
+msgid "🧪 Modo Demo"
+msgstr ""
+
+#: includes/class-setup-wizard.php:206
+msgid "Ideal para empezar. Genera CFDIs simulados sin usar la API real. Perfecto para conocer el plugin."
+msgstr ""
+
+#: includes/class-setup-wizard.php:211
+msgid "🔧 Sandbox (Pruebas)"
+msgstr ""
+
+#: includes/class-setup-wizard.php:213
+msgid "Para pruebas con la API real de Factura.com. Genera CFDIs reales pero sin validez fiscal."
+msgstr ""
+
+#: includes/class-setup-wizard.php:218
+msgid "🚀 Producción"
+msgstr ""
+
+#: includes/class-setup-wizard.php:220
+msgid "Para generar CFDIs con validez fiscal. Solo selecciona si ya probaste en sandbox."
+msgstr ""
+
+#: includes/class-setup-wizard.php:224
+msgid "Recomendación:"
+msgstr ""
+
+#: includes/class-setup-wizard.php:224
+msgid "Si es tu primera vez, comienza con \"Modo Demo\" para familiarizarte con el plugin."
+msgstr ""
+
+#: includes/class-setup-wizard.php:233
+msgid "Modo Demo Activado"
+msgstr ""
+
+#: includes/class-setup-wizard.php:236
+msgid "✅ ¡Perfecto!"
+msgstr ""
+
+#: includes/class-setup-wizard.php:237
+msgid "Has seleccionado el modo demo. No necesitas credenciales para continuar."
+msgstr ""
+
+#: includes/class-setup-wizard.php:238
+msgid "Podrás generar CFDIs simulados para probar todas las funcionalidades."
+msgstr ""
+
+#: includes/class-setup-wizard.php:242
+msgid "¿Cuándo configurar credenciales reales?"
+msgstr ""
+
+#: includes/class-setup-wizard.php:243
+msgid "Cuando estés listo para generar CFDIs reales, ve a WooCommerce → Factura.com y:"
+msgstr ""
+
+#: includes/class-setup-wizard.php:245
+msgid "Desactiva el \"Modo Demo\""
+msgstr ""
+
+#: includes/class-setup-wizard.php:246
+msgid "Agrega tus credenciales de Factura.com"
+msgstr ""
+
+#: includes/class-setup-wizard.php:247
+msgid "Prueba la conexión"
+msgstr ""
+
+#: includes/class-setup-wizard.php:255
+msgid "Configura tus credenciales de Factura.com"
+msgstr ""
+
+#: includes/class-setup-wizard.php:258
+msgid "¿Cómo obtener tus credenciales?"
+msgstr ""
+
+#: includes/class-setup-wizard.php:259
+msgid "Inicia sesión en"
+msgstr ""
+
+#: includes/class-setup-wizard.php:264
+msgid "Ve a: Desarrolladores → API → Datos de acceso"
+msgstr ""
+
+#: includes/class-setup-wizard.php:265
+msgid "Copia tu F-Api-Key y F-Secret-Key"
+msgstr ""
+
+#: includes/class-setup-wizard.php:266
+msgid "Ve a: Configuraciones → Series y folios para obtener el Serie ID"
+msgstr ""
+
+#: includes/class-setup-wizard.php:272
+msgid "F-Api-Key"
+msgstr ""
+
+#: includes/class-setup-wizard.php:274
+msgid "Tu API Key de Factura.com"
+msgstr ""
+
+#: includes/class-setup-wizard.php:278
+msgid "F-Secret-Key"
+msgstr ""
+
+#: includes/class-setup-wizard.php:280
+msgid "Tu Secret Key de Factura.com"
+msgstr ""
+
+#: includes/class-setup-wizard.php:284
+msgid "Serie ID"
+msgstr ""
+
+#: includes/class-setup-wizard.php:286
+msgid "ID numérico de tu serie (ej: 1247)"
+msgstr ""
+
+#: includes/class-setup-wizard.php:295
+msgid "Configuración fiscal básica"
+msgstr ""
+
+#: includes/class-setup-wizard.php:297
+msgid "Configura los valores básicos según los catálogos del SAT. Podrás cambiarlos más tarde."
+msgstr ""
+
+#: includes/class-setup-wizard.php:302
+msgid "Uso de CFDI"
+msgstr ""
+
+#: includes/class-setup-wizard.php:309
+msgid "Uso más común que darán tus clientes al CFDI"
+msgstr ""
+
+#: includes/class-setup-wizard.php:313
+msgid "Forma de Pago"
+msgstr ""
+
+#: includes/class-setup-wizard.php:323
+msgid "Forma de pago más común en tu tienda"
+msgstr ""
+
+#: includes/class-setup-wizard.php:327
+msgid "Método de Pago"
+msgstr ""
+
+#: includes/class-setup-wizard.php:333
+msgid "Generalmente \"PUE\" para ventas al momento"
+msgstr ""
+
+#: includes/class-setup-wizard.php:337
+msgid "Lugar de Expedición"
+msgstr ""
+
+#: includes/class-setup-wizard.php:339
+msgid "Código postal donde tienes tu empresa (5 dígitos)"
+msgstr ""
+
+#: includes/class-setup-wizard.php:348
+msgid "Probar configuración"
+msgstr ""
+
+#: includes/class-setup-wizard.php:352
+msgid "✅ Modo Demo Configurado"
+msgstr ""
+
+#: includes/class-setup-wizard.php:353
+msgid "Tu configuración está lista. En modo demo puedes:"
+msgstr ""
+
+#: includes/class-setup-wizard.php:355
+msgid "Generar CFDIs simulados desde cualquier pedido"
+msgstr ""
+
+#: includes/class-setup-wizard.php:356
+msgid "Probar el campo RFC en el checkout"
+msgstr ""
+
+#: includes/class-setup-wizard.php:357
+msgid "Ver cómo funcionan los emails automáticos"
+msgstr ""
+
+#: includes/class-setup-wizard.php:365
+msgid "Resumen de tu configuración"
+msgstr ""
+
+#: includes/class-setup-wizard.php:367
+msgid "Entorno:"
+msgstr ""
+
+#: includes/class-setup-wizard.php:370
+msgid "API Key:"
+msgstr ""
+
+#: includes/class-setup-wizard.php:373
+msgid "Serie ID:"
+msgstr ""
+
+#: includes/class-setup-wizard.php:376
+msgid "Uso CFDI:"
+msgstr ""
+
+#: includes/class-setup-wizard.php:379
+msgid "Lugar Expedición:"
+msgstr ""
+
+#: includes/class-setup-wizard.php:391
+msgid "🎉 ¡Configuración completada!"
+msgstr ""
+
+#: includes/class-setup-wizard.php:394
+msgid "Tu plugin está listo para usar"
+msgstr ""
+
+#: includes/class-setup-wizard.php:395
+msgid "La integración con Factura.com ha sido configurada exitosamente."
+msgstr ""
+
+#: includes/class-setup-wizard.php:399
+msgid "Próximos pasos recomendados"
+msgstr ""
+
+#: includes/class-setup-wizard.php:401
+msgid "Ve a WooCommerce → Pedidos y prueba generar un CFDI"
+msgstr ""
+
+#: includes/class-setup-wizard.php:402
+msgid "Haz una compra de prueba para verificar el campo RFC"
+msgstr ""
+
+#: includes/class-setup-wizard.php:403
+msgid "Revisa la configuración completa en WooCommerce → Factura.com"
+msgstr ""
+
+#: includes/class-setup-wizard.php:404
+msgid "Activa la generación automática si lo deseas"
+msgstr ""
+
+#: includes/class-setup-wizard.php:408
+msgid "¿Necesitas ayuda?"
+msgstr ""
+
+#: includes/class-setup-wizard.php:410
+msgid "Documentación:"
+msgstr ""
+
+#: includes/class-setup-wizard.php:411
+msgid "Logs:"
+msgstr ""
+
+#: includes/class-setup-wizard.php:412
+msgid "Soporte Factura.com:"
+msgstr ""
+
+#: includes/class-setup-wizard.php:424
+msgid "Error de seguridad"
+msgstr ""
+
+#: includes/class-setup-wizard.php:452
+msgid "Error de seguridad"
+msgstr ""
+
+#: includes/class-setup-wizard.php:466
+msgid "Error de seguridad"
+msgstr ""
+
+#: includes/class-setup-wizard.php:483
+msgid "Error de seguridad"
+msgstr ""
+
+#: includes/class-utilities.php:171
+msgid "Gestionar CFDIs"
+msgstr ""
+
+#: includes/class-utilities.php:172
+msgid "Generar CFDIs"
+msgstr ""
+
+#: includes/class-utilities.php:173
+msgid "Cancelar CFDIs"
+msgstr ""
+
+#: includes/class-utilities.php:174
+msgid "Ver logs de CFDIs"
+msgstr ""
+
+#: includes/class-utilities.php:175
+msgid "Configurar Factura.com"
+msgstr ""
+
+#: admin/views/settings-page.php:82
+msgid "Configuración guardada exitosamente."
+msgstr ""
+
+#: admin/views/settings-page.php:110
+msgid "Configuración de Factura.com"
+msgstr ""
+
+#: admin/views/settings-page.php:116
+msgid "CFDIs Generados"
+msgstr ""
+
+#: admin/views/settings-page.php:120
+msgid "CFDIs Cancelados"
+msgstr ""
+
+#: admin/views/settings-page.php:124
+msgid "Últimos 30 días"
+msgstr ""
+
+#: admin/views/settings-page.php:128
+msgid "Demo"
+msgstr ""
+
+#: admin/views/settings-page.php:128
+msgid "Sandbox"
+msgstr ""
+
+#: admin/views/settings-page.php:128
+msgid "Producción"
+msgstr ""
+
+#: admin/views/settings-page.php:128
+msgid "Modo Actual"
+msgstr ""
+
+#: admin/views/settings-page.php:135
+msgid "Modo Demo Activo"
+msgstr ""
+
+#: admin/views/settings-page.php:136
+msgid "Los CFDIs generados son simulados y no tienen validez fiscal. Configura las credenciales de Factura.com para generar CFDIs reales."
+msgstr ""
+
+#: admin/views/settings-page.php:142
+msgid "Modo Sandbox Activo"
+msgstr ""
+
+#: admin/views/settings-page.php:143
+msgid "Estás usando el entorno de pruebas de Factura.com. Los CFDIs son reales pero no tienen validez fiscal."
+msgstr ""
+
+#: admin/views/settings-page.php:148
+msgid "General"
+msgstr ""
+
+#: admin/views/settings-page.php:149
+msgid "Configuración Fiscal"
+msgstr ""
+
+#: admin/views/settings-page.php:150
+msgid "Avanzado"
+msgstr ""
+
+#: admin/views/settings-page.php:151
+msgid "Herramientas"
+msgstr ""
+
+#: admin/views/settings-page.php:158
+msgid "Configuración General"
+msgstr ""
+
+#: admin/views/settings-page.php:162
+msgid "Modo de Operación"
+msgstr ""
+
+#: admin/views/settings-page.php:166
+msgid "Modo Demo"
+msgstr ""
+
+#: admin/views/settings-page.php:167
+msgid "Genera CFDIs simulados para pruebas. No requiere credenciales."
+msgstr ""
+
+#: admin/views/settings-page.php:171
+msgid "Modo Real"
+msgstr ""
+
+#: admin/views/settings-page.php:172
+msgid "Conecta con la API de Factura.com. Requiere credenciales válidas."
+msgstr ""
+
+#: admin/views/settings-page.php:180
+msgid "Entorno API"
+msgstr ""
+
+#: admin/views/settings-page.php:184
+msgid "Sandbox (Pruebas)"
+msgstr ""
+
+#: admin/views/settings-page.php:187
+msgid "Producción"
+msgstr ""
+
+#: admin/views/settings-page.php:190
+msgid "Sandbox para pruebas, Producción para CFDIs con validez fiscal."
+msgstr ""
+
+#: admin/views/settings-page.php:194
+msgid "F-Api-Key"
+msgstr ""
+
+#: admin/views/settings-page.php:196
+msgid "Tu API Key de Factura.com. Obténla desde tu panel de Factura.com."
+msgstr ""
+
+#: admin/views/settings-page.php:201
+msgid "F-Secret-Key"
+msgstr ""
+
+#: admin/views/settings-page.php:203
+msgid "Tu Secret Key de Factura.com. Manténla segura."
+msgstr ""
+
+#: admin/views/settings-page.php:208
+msgid "Serie ID"
+msgstr ""
+
+#: admin/views/settings-page.php:210
+msgid "ID numérico de tu serie configurada en Factura.com (ej: 1247)."
+msgstr ""
+
+#: admin/views/settings-page.php:215
+msgid "Probar Conexión API"
+msgstr ""
+
+#: admin/views/settings-page.php:222
+msgid "Generación Automática"
+msgstr ""
+
+#: admin/views/settings-page.php:226
+msgid "Generar CFDI automáticamente cuando un pedido se complete"
+msgstr ""
+
+#: admin/views/settings-page.php:232
+msgid "Envío de Email"
+msgstr ""
+
+#: admin/views/settings-page.php:236
+msgid "Enviar CFDI por email al cliente automáticamente"
+msgstr ""
+
+#: admin/views/settings-page.php:242
+msgid "RFC Obligatorio"
+msgstr ""
+
+#: admin/views/settings-page.php:246
+msgid "Requerir RFC en el checkout"
+msgstr ""
+
+#: admin/views/settings-page.php:248
+msgid "Si no se requiere, se usará el RFC genérico XAXX010101000."
+msgstr ""
+
+#: admin/views/settings-page.php:257
+msgid "Configuración Fiscal"
+msgstr ""
+
+#: admin/views/settings-page.php:258
+msgid "Configura los valores según los catálogos oficiales del SAT."
+msgstr ""
+
+#: admin/views/settings-page.php:262
+msgid "Uso de CFDI"
+msgstr ""
+
+#: admin/views/settings-page.php:267
+msgid "Uso más común que darán tus clientes al CFDI."
+msgstr ""
+
+#: admin/views/settings-page.php:272
+msgid "Forma de Pago"
+msgstr ""
+
+#: admin/views/settings-page.php:280
+msgid "Método de Pago"
+msgstr ""
+
+#: admin/views/settings-page.php:288
+msgid "Lugar de Expedición"
+msgstr ""
+
+#: admin/views/settings-page.php:290
+msgid "Código postal donde tienes registrada tu empresa (5 dígitos)."
+msgstr ""
+
+#: admin/views/settings-page.php:295
+msgid "Clave Producto/Servicio"
+msgstr ""
+
+#: admin/views/settings-page.php:297
+msgid "Clave del SAT para tus productos/servicios. Por defecto: 81112101 (Servicios de comercio por internet)."
+msgstr ""
+
+#: admin/views/settings-page.php:302
+msgid "Unidad de Medida"
+msgstr ""
+
+#: admin/views/settings-page.php:307
+msgid "Descripción de la unidad"
+msgstr ""
+
+#: admin/views/settings-page.php:312
+msgid "Tasa de IVA"
+msgstr ""
+
+#: admin/views/settings-page.php:314
+msgid "Tasa de IVA a aplicar (ej: 0.16 para 16%)."
+msgstr ""
+
+#: admin/views/settings-page.php:319
+msgid "Objeto de Impuesto"
+msgstr ""
+
+#: admin/views/settings-page.php:330
+msgid "Configuración Avanzada"
+msgstr ""
+
+#: admin/views/settings-page.php:334
+msgid "Modo Debug"
+msgstr ""
+
+#: admin/views/settings-page.php:338
+msgid "Activar logging detallado para debugging"
+msgstr ""
+
+#: admin/views/settings-page.php:340
+msgid "Solo activar si necesitas diagnosticar problemas. Puede afectar el rendimiento."
+msgstr ""
+
+#: admin/views/settings-page.php:345
+msgid "Tipo de Cambio"
+msgstr ""
+
+#: admin/views/settings-page.php:347
+msgid "Tipo de cambio para monedas extranjeras (solo si vendes en USD, EUR, etc.)."
+msgstr ""
+
+#: admin/views/settings-page.php:352
+msgid "Timeout API"
+msgstr ""
+
+#: admin/views/settings-page.php:354
+msgid "Tiempo límite en segundos para peticiones API (30-300)."
+msgstr ""
+
+#: admin/views/settings-page.php:359
+msgid "Retención de Logs"
+msgstr ""
+
+#: admin/views/settings-page.php:361
+msgid "Días que se conservan los logs antes de eliminarlos automáticamente."
+msgstr ""
+
+#: admin/views/settings-page.php:366
+msgid "Eliminar Datos"
+msgstr ""
+
+#: admin/views/settings-page.php:370
+msgid "Eliminar todos los datos al desinstalar el plugin"
+msgstr ""
+
+#: admin/views/settings-page.php:372
+msgid "⚠️ CUIDADO: Esto eliminará permanentemente todos los CFDIs, logs y configuraciones."
+msgstr ""
+
+#: admin/views/settings-page.php:381
+msgid "Herramientas de Diagnóstico"
+msgstr ""
+
+#: admin/views/settings-page.php:385
+msgid "Información del Sistema"
+msgstr ""
+
+#: admin/views/settings-page.php:386
+msgid "Ver información técnica del servidor y configuración."
+msgstr ""
+
+#: admin/views/settings-page.php:387
+msgid "Ver Información"
+msgstr ""
+
+#: admin/views/settings-page.php:391
+msgid "Probar Email"
+msgstr ""
+
+#: admin/views/settings-page.php:392
+msgid "Enviar un email de prueba para verificar la configuración."
+msgstr ""
+
+#: admin/views/settings-page.php:393
+msgid "Probar Email"
+msgstr ""
+
+#: admin/views/settings-page.php:397
+msgid "Limpiar Logs"
+msgstr ""
+
+#: admin/views/settings-page.php:398
+msgid "Eliminar todos los logs del plugin para liberar espacio."
+msgstr ""
+
+#: admin/views/settings-page.php:399
+msgid "Limpiar Logs"
+msgstr ""
+
+#: admin/views/settings-page.php:403
+msgid "Exportar Configuración"
+msgstr ""
+
+#: admin/views/settings-page.php:404
+msgid "Descargar un backup de tu configuración actual."
+msgstr ""
+
+#: admin/views/settings-page.php:405
+msgid "Exportar"
+msgstr ""
+
+#: admin/views/settings-page.php:409
+msgid "Reparar Instalación"
+msgstr ""
+
+#: admin/views/settings-page.php:410
+msgid "Verificar y reparar tablas y configuraciones del plugin."
+msgstr ""
+
+#: admin/views/settings-page.php:411
+msgid "Reparar"
+msgstr ""
+
+#: admin/views/settings-page.php:415
+msgid "Reiniciar Configuración"
+msgstr ""
+
+#: admin/views/settings-page.php:416
+msgid "Ejecutar el asistente de configuración nuevamente."
+msgstr ""
+
+#: admin/views/settings-page.php:417
+msgid "Reiniciar Setup"
+msgstr ""
+
+#: admin/views/settings-page.php:424
+msgid "Guardar Configuración"
+msgstr ""
+
+#: admin/views/settings-page.php:568
+msgid "Probando..."
+msgstr ""
+
+#: admin/views/settings-page.php:582
+msgid "Probar Conexión API"
+msgstr ""
+
+#: admin/views/settings-page.php:599
+msgid "Ingresa el email de prueba:"
+msgstr ""
+
+#: admin/views/settings-page.php:610
+msgid "¿Estás seguro de eliminar todos los logs?"
+msgstr ""
+
+#: admin/views/order-meta-box.php:37
+msgid "Sin CFDI"
+msgstr ""
+
+#: admin/views/order-meta-box.php:39
+msgid "No se ha generado CFDI para este pedido."
+msgstr ""
+
+#: admin/views/order-meta-box.php:46
+msgid "CFDI Cancelado"
+msgstr ""
+
+#: admin/views/order-meta-box.php:47
+msgid "Cancelado el %s"
+msgstr ""
+
+#: admin/views/order-meta-box.php:49
+msgid "Motivo: %s"
+msgstr ""
+
+#: admin/views/order-meta-box.php:56
+msgid "CFDI Demo"
+msgstr ""
+
+#: admin/views/order-meta-box.php:58
+msgid "CFDI simulado sin validez fiscal."
+msgstr ""
+
+#: admin/views/order-meta-box.php:63
+msgid "CFDI Generado"
+msgstr ""
+
+#: admin/views/order-meta-box.php:65
+msgid "Generado el %s"
+msgstr ""
+
+#: admin/views/order-meta-box.php:66
+msgid "Entorno: %s"
+msgstr ""
+
+#: admin/views/order-meta-box.php:73
+msgid "Información del CFDI"
+msgstr ""
+
+#: admin/views/order-meta-box.php:77
+msgid "Serie-Folio:"
+msgstr ""
+
+#: admin/views/order-meta-box.php:83
+msgid "UUID:"
+msgstr ""
+
+#: admin/views/order-meta-box.php:85
+msgid "Copiar UUID"
+msgstr ""
+
+#: admin/views/order-meta-box.php:89
+msgid "RFC Cliente:"
+msgstr ""
+
+#: admin/views/order-meta-box.php:93
+msgid "Total:"
+msgstr ""
+
+#: admin/views/order-meta-box.php:101
+msgid "Acciones"
+msgstr ""
+
+#: admin/views/order-meta-box.php:106
+msgid "Generar CFDI"
+msgstr ""
+
+#: admin/views/order-meta-box.php:111
+msgid "Regenerar CFDI"
+msgstr ""
+
+#: admin/views/order-meta-box.php:116
+msgid "Descargar PDF"
+msgstr ""
+
+#: admin/views/order-meta-box.php:122
+msgid "Descargar XML"
+msgstr ""
+
+#: admin/views/order-meta-box.php:127
+msgid "Cancelar CFDI"
+msgstr ""
+
+#: admin/views/order-meta-box.php:131
+msgid "Regenerar CFDI"
+msgstr ""
+
+#: admin/views/order-meta-box.php:138
+msgid "Nota:"
+msgstr ""
+
+#: admin/views/order-meta-box.php:138
+msgid "Este es un CFDI demo sin validez fiscal. Para generar CFDIs reales, configura las credenciales de Factura.com."
+msgstr ""
+
+#: admin/views/order-meta-box.php:143
+msgid "Sandbox:"
+msgstr ""
+
+#: admin/views/order-meta-box.php:143
+msgid "Este CFDI fue generado en el entorno de pruebas."
+msgstr ""
+
+#: admin/views/order-meta-box.php:148
+msgid "Configurar Factura.com"
+msgstr ""
+
+#: admin/views/order-meta-box.php:152
+msgid "Ver Logs"
+msgstr ""
+
+#: admin/views/order-meta-box.php:159
+msgid "Diagnóstico Rápido"
+msgstr ""
+
+#: admin/views/logs-page.php:26
+msgid "Logs eliminados exitosamente."
+msgstr ""
+
+#: admin/views/logs-page.php:46
+msgid "Logs de Factura.com"
+msgstr ""
+
+#: admin/views/logs-page.php:52
+msgid "Total de Logs"
+msgstr ""
+
+#: admin/views/logs-page.php:56
+msgid "Errores"
+msgstr ""
+
+#: admin/views/logs-page.php:60
+msgid "Advertencias"
+msgstr ""
+
+#: admin/views/logs-page.php:64
+msgid "Hoy"
+msgstr ""
+
+#: admin/views/logs-page.php:75
+msgid "Nivel:"
+msgstr ""
+
+#: admin/views/logs-page.php:77
+msgid "Todos los niveles"
+msgstr ""
+
+#: admin/views/logs-page.php:78
+msgid "Error"
+msgstr ""
+
+#: admin/views/logs-page.php:79
+msgid "Advertencia"
+msgstr ""
+
+#: admin/views/logs-page.php:80
+msgid "Info"
+msgstr ""
+
+#: admin/views/logs-page.php:81
+msgid "Debug"
+msgstr ""
+
+#: admin/views/logs-page.php:82
+msgid "Éxito"
+msgstr ""
+
+#: admin/views/logs-page.php:86
+msgid "Acción:"
+msgstr ""
+
+#: admin/views/logs-page.php:88
+msgid "Todas las acciones"
+msgstr ""
+
+#: admin/views/logs-page.php:89
+msgid "CFDI Generado"
+msgstr ""
+
+#: admin/views/logs-page.php:90
+msgid "CFDI Cancelado"
+msgstr ""
+
+#: admin/views/logs-page.php:91
+msgid "Request API"
+msgstr ""
+
+#: admin/views/logs-page.php:92
+msgid "Error de Validación"
+msgstr ""
+
+#: admin/views/logs-page.php:93
+msgid "Email Enviado"
+msgstr ""
+
+#: admin/views/logs-page.php:97
+msgid "ID Pedido:"
+msgstr ""
+
+#: admin/views/logs-page.php:102
+msgid "Desde:"
+msgstr ""
+
+#: admin/views/logs-page.php:107
+msgid "Hasta:"
+msgstr ""
+
+#: admin/views/logs-page.php:112
+msgid "Por página:"
+msgstr ""
+
+#: admin/views/logs-page.php:120
+msgid "Filtrar"
+msgstr ""
+
+#: admin/views/logs-page.php:121
+msgid "Limpiar"
+msgstr ""
+
+#: admin/views/logs-page.php:133
+msgid "Limpiar Todos los Logs"
+msgstr ""
+
+#: admin/views/logs-page.php:138
+msgid "Exportar Logs"
+msgstr ""
+
+#: admin/views/logs-page.php:142
+msgid "Actualizar"
+msgstr ""
+
+#: admin/views/logs-page.php:146
+msgid "Auto-actualizar (30s)"
+msgstr ""
+
+#: admin/views/logs-page.php:155
+msgid "No se encontraron logs con los filtros aplicados."
+msgstr ""
+
+#: admin/views/logs-page.php:160
+msgid "Fecha/Hora"
+msgstr ""
+
+#: admin/views/logs-page.php:161
+msgid "Nivel"
+msgstr ""
+
+#: admin/views/logs-page.php:162
+msgid "Acción"
+msgstr ""
+
+#: admin/views/logs-page.php:163
+msgid "Pedido"
+msgstr ""
+
+#: admin/views/logs-page.php:164
+msgid "Mensaje"
+msgstr ""
+
+#: admin/views/logs-page.php:165
+msgid "Acciones"
+msgstr ""
+
+#: admin/views/logs-page.php:189
+msgid "Ver datos"
+msgstr ""
+
+#: admin/views/logs-page.php:198
+msgid "Ver relacionados"
+msgstr ""
+
+#: admin/views/logs-page.php:212
+msgid "Mostrando %d - %d de %d logs"
+msgstr ""
+
+#: admin/views/logs-page.php:220
+msgid "Primera"
+msgstr ""
+
+#: admin/views/logs-page.php:225
+msgid "Anterior"
+msgstr ""
+
+#: admin/views/logs-page.php:236
+msgid "Siguiente"
+msgstr ""
+
+#: admin/views/logs-page.php:241
+msgid "Última"
+msgstr ""
+
+#: admin/views/stats-page.php:20
+msgid "Estadísticas de CFDIs"
+msgstr ""
+
+#: admin/views/stats-page.php:26
+msgid "Período:"
+msgstr ""
+
+#: admin/views/stats-page.php:28
+msgid "Últimos 7 días"
+msgstr ""
+
+#: admin/views/stats-page.php:29
+msgid "Últimos 30 días"
+msgstr ""
+
+#: admin/views/stats-page.php:30
+msgid "Últimos 90 días"
+msgstr ""
+
+#: admin/views/stats-page.php:31
+msgid "Último año"
+msgstr ""
+
+#: admin/views/stats-page.php:32
+msgid "Personalizado"
+msgstr ""
+
+#: admin/views/stats-page.php:40
+msgid "Actualizar"
+msgstr ""
+
+#: admin/views/stats-page.php:41
+msgid "Exportar"
+msgstr ""
+
+#: admin/views/stats-page.php:54
+msgid "CFDIs Generados"
+msgstr ""
+
+#: admin/views/stats-page.php:56
+msgid "vs período anterior"
+msgstr ""
+
+#: admin/views/stats-page.php:63
+msgid "Tasa de Éxito"
+msgstr ""
+
+#: admin/views/stats-page.php:65
+msgid "exitosos"
+msgstr ""
+
+#: admin/views/stats-page.php:72
+msgid "CFDIs Cancelados"
+msgstr ""
+
+#: admin/views/stats-page.php:74
+msgid "del total"
+msgstr ""
+
+#: admin/views/stats-page.php:81
+msgid "Monto Total Facturado"
+msgstr ""
+
+#: admin/views/stats-page.php:83
+msgid "promedio"
+msgstr ""
+
+#: admin/views/stats-page.php:93
+msgid "CFDIs por Día"
+msgstr ""
+
+#: admin/views/stats-page.php:98
+msgid "Distribución por Estado"
+msgstr ""
+
+#: admin/views/stats-page.php:105
+msgid "Monto Facturado por Día"
+msgstr ""
+
+#: admin/views/stats-page.php:110
+msgid "Métodos de Pago"
+msgstr ""
+
+#: admin/views/stats-page.php:119
+msgid "Productos Más Facturados"
+msgstr ""
+
+#: admin/views/stats-page.php:122
+msgid "Producto"
+msgstr ""
+
+#: admin/views/stats-page.php:123
+msgid "CFDIs"
+msgstr ""
+
+#: admin/views/stats-page.php:124
+msgid "Cantidad"
+msgstr ""
+
+#: admin/views/stats-page.php:125
+msgid "Monto Total"
+msgstr ""
+
+#: admin/views/stats-page.php:144
+msgid "Clientes con Más CFDIs"
+msgstr ""
+
+#: admin/views/stats-page.php:147
+msgid "Cliente"
+msgstr ""
+
+#: admin/views/stats-page.php:148
+msgid "RFC"
+msgstr ""
+
+#: admin/views/stats-page.php:149
+msgid "CFDIs"
+msgstr ""
+
+#: admin/views/stats-page.php:150
+msgid "Monto Total"
+msgstr ""
+
+#: admin/views/stats-page.php:151
+msgid "Último CFDI"
+msgstr ""
+
+#: admin/views/stats-page.php:168
+msgid "Errores Más Frecuentes"
+msgstr ""
+
+#: admin/views/stats-page.php:171
+msgid "Tipo de Error"
+msgstr ""
+
+#: admin/views/stats-page.php:172
+msgid "Ocurrencias"
+msgstr ""
+
+#: admin/views/stats-page.php:173
+msgid "Última Vez"
+msgstr ""
+
+#: admin/views/stats-page.php:174
+msgid "Acción"
+msgstr ""
+
+#: admin/views/stats-page.php:181
+msgid "Acción:"
+msgstr ""
+
+#: admin/views/stats-page.php:189
+msgid "Ver Logs"
+msgstr ""
+
+#: admin/views/stats-page.php:199
+msgid "Métricas de Rendimiento"
+msgstr ""
+
+#: admin/views/stats-page.php:203
+msgid "Tiempo Promedio de Generación"
+msgstr ""
+
+#: admin/views/stats-page.php:205
+msgid "Desde solicitud hasta CFDI completado"
+msgstr ""
+
+#: admin/views/stats-page.php:209
+msgid "Disponibilidad API"
+msgstr ""
+
+#: admin/views/stats-page.php:211
+msgid "Porcentaje de requests exitosos"
+msgstr ""
+
+#: admin/views/stats-page.php:215
+msgid "CFDIs por Hora Pico"
+msgstr ""
+
+#: admin/views/stats-page.php:217
+msgid "Máximo procesado en una hora"
+msgstr ""
+
+#: admin/views/stats-page.php:221
+msgid "Reintentos Exitosos"
+msgstr ""
+
+#: admin/views/stats-page.php:223
+msgid "CFDIs exitosos tras reintento"
+msgstr ""
+
+#: admin/views/stats-page.php:230
+msgid "Configuración Actual"
+msgstr ""
+
+#: admin/views/stats-page.php:234
+msgid "Modo:"
+msgstr ""
+
+#: admin/views/stats-page.php:239
+msgid "Entorno:"
+msgstr ""
+
+#: admin/views/stats-page.php:244
+msgid "Generación Automática:"
+msgstr ""
+
+#: admin/views/stats-page.php:249
+msgid "Envío de Email:"
+msgstr ""
+
+#: assets/js/frontend.js:172
+msgid "RFC debe tener 13 caracteres"
+msgstr ""
+
+#: assets/js/frontend.js:177
+msgid "Formato de RFC inválido"
+msgstr ""
+
+#: assets/js/frontend.js:198
+msgid "Fecha en RFC inválida"
+msgstr ""
+
+#: assets/js/frontend.js:201
+msgid "RFC válido"
+msgstr ""
+
+#: assets/js/frontend.js:214
+msgid "Validando..."
+msgstr ""
+
+#: assets/js/frontend.js:227
+msgid "RFC válido"
+msgstr ""
+
+#: assets/js/frontend.js:229
+msgid "RFC inválido"
+msgstr ""
+
+#: assets/js/frontend.js:276
+msgid "RFC incompleto"
+msgstr ""
+
+#: assets/js/frontend.js:345
+msgid "RFC inválido: "
+msgstr ""
