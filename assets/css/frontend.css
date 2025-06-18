@@ -1,0 +1,255 @@
+/* frontend.css - Estilos para el frontend del plugin */
+
+/* Campo RFC en el checkout */
+#woo-factura-com-rfc-field {
+    margin: 15px 0;
+}
+
+#woo-factura-com-rfc-field input {
+    text-transform: uppercase;
+}
+
+.woo-factura-com-rfc-note {
+    margin-top: 5px;
+    font-size: 13px;
+    color: #666;
+    font-style: italic;
+}
+
+/* Validación de RFC */
+.rfc-field-container {
+    position: relative;
+}
+
+.rfc-validation-indicator {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+}
+
+.rfc-validation-indicator.valid {
+    color: #28a745;
+}
+
+.rfc-validation-indicator.invalid {
+    color: #dc3545;
+}
+
+.rfc-validation-indicator.loading {
+    color: #ffc107;
+}
+
+/* Estados del campo RFC */
+input.rfc-valid {
+    border-color: #28a745 !important;
+    box-shadow: 0 0 0 1px #28a745;
+}
+
+input.rfc-invalid {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 1px #dc3545;
+}
+
+input.rfc-loading {
+    border-color: #ffc107 !important;
+    box-shadow: 0 0 0 1px #ffc107;
+}
+
+/* Mensaje de validación */
+.rfc-validation-message {
+    font-size: 12px;
+    margin-top: 5px;
+    padding: 5px 8px;
+    border-radius: 3px;
+    display: none;
+}
+
+.rfc-validation-message.valid {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    display: block;
+}
+
+.rfc-validation-message.invalid {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    display: block;
+}
+
+.rfc-validation-message.loading {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+    display: block;
+}
+
+/* Enlaces CFDI en cuenta del cliente */
+.cfdi-links {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+}
+
+.cfdi-links .button {
+    font-size: 12px;
+    padding: 6px 12px;
+    min-height: auto;
+    line-height: 1.2;
+    text-decoration: none;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.btn-cfdi-pdf {
+    background: #667eea;
+    color: white;
+    border: 1px solid #667eea;
+}
+
+.btn-cfdi-pdf:hover {
+    background: #5a6fd8;
+    color: white;
+}
+
+.btn-cfdi-xml {
+    background: #6c757d;
+    color: white;
+    border: 1px solid #6c757d;
+}
+
+.btn-cfdi-xml:hover {
+    background: #5a6268;
+    color: white;
+}
+
+.btn-request-cfdi {
+    background: #28a745;
+    color: white;
+    border: 1px solid #28a745;
+    font-size: 11px;
+    padding: 4px 8px;
+}
+
+.btn-request-cfdi:hover {
+    background: #218838;
+    color: white;
+}
+
+/* Tooltip para UUID */
+[title] {
+    cursor: help;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cfdi-links {
+        align-items: stretch;
+    }
+    
+    .cfdi-links .button {
+        text-align: center;
+        width: 100%;
+        margin-bottom: 3px;
+    }
+    
+    #woo-factura-com-rfc-field input {
+        font-size: 16px; /* Previene zoom en iOS */
+    }
+}
+
+/* Checkout específico */
+.woocommerce-checkout #woo-factura-com-rfc-field {
+    clear: both;
+}
+
+.woocommerce-checkout #woo-factura-com-rfc-field .form-row {
+    width: 100%;
+}
+
+/* Estilos para emails CFDI */
+.cfdi-email-section {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-left: 4px solid #667eea;
+}
+
+.cfdi-email-section h3 {
+    margin-top: 0;
+    color: #495057;
+}
+
+.cfdi-email-section code {
+    background: #e9ecef;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: monospace;
+    word-break: break-all;
+}
+
+/* Indicadores de estado */
+.cfdi-status-indicator {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.cfdi-status-indicator.demo {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.cfdi-status-indicator.sandbox {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+.cfdi-status-indicator.production {
+    background: #d4edda;
+    color: #155724;
+}
+
+.cfdi-status-indicator.cancelled {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+/* Loading spinner */
+.cfdi-loading {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #667eea;
+    border-radius: 50%;
+    animation: cfdi-spin 1s linear infinite;
+}
+
+@keyframes cfdi-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Accessibility */
+.screen-reader-text {
+    clip: rect(1px, 1px, 1px, 1px);
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+}
+
+/* Focus styles */
+.cfdi-links .button:focus,
+input[name$="_rfc"]:focus {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+}
