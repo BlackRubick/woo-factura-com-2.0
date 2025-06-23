@@ -1,7 +1,8 @@
 <?php
 /**
- * Asistente de configuración inicial para WooCommerce Factura.com
- * Guía al usuario a través del proceso de configuración paso a paso
+ * Asistente de configuración inicial CORREGIDO para WooCommerce Factura.com
+ * 
+ * REEMPLAZA COMPLETAMENTE el archivo includes/class-setup-wizard.php
  */
 
 if (!defined('ABSPATH')) {
@@ -31,7 +32,7 @@ if (!class_exists('WooFacturaComSetupWizard')) {
                 'welcome' => array(
                     'name' => __('Bienvenida', 'woo-factura-com'),
                     'view' => array($this, 'step_welcome'),
-                    'handler' => ''
+                    'handler' => array($this, 'save_welcome') // FIX: Agregar handler
                 ),
                 'environment' => array(
                     'name' => __('Entorno', 'woo-factura-com'),
@@ -66,13 +67,16 @@ if (!class_exists('WooFacturaComSetupWizard')) {
          */
         public function admin_menus() {
             if ($this->should_show_setup_wizard()) {
-                add_dashboard_page(
+                $page_hook = add_dashboard_page(
                     __('Configurar Factura.com', 'woo-factura-com'),
                     __('Configurar Factura.com', 'woo-factura-com'),
                     'manage_options',
                     'woo-factura-com-setup',
                     array($this, 'setup_wizard')
                 );
+                
+                // DEBUG
+                error_log('WooFacturaCom Setup: Página de setup agregada con hook: ' . $page_hook);
             }
         }
         
@@ -80,8 +84,17 @@ if (!class_exists('WooFacturaComSetupWizard')) {
          * Verificar si debe mostrar el wizard
          */
         private function should_show_setup_wizard() {
-            return !get_option('woo_factura_com_setup_completed', false) && 
-                   !get_option('woo_factura_com_hide_setup_wizard', false);
+            $setup_completed = get_option('woo_factura_com_setup_completed', false);
+            $hide_wizard = get_option('woo_factura_com_hide_setup_wizard', false);
+            
+            $should_show = !$setup_completed && !$hide_wizard;
+            
+            error_log('WooFacturaCom Setup Debug:');
+            error_log('- Setup completed: ' . ($setup_completed ? 'true' : 'false'));
+            error_log('- Hide wizard: ' . ($hide_wizard ? 'true' : 'false'));
+            error_log('- Should show wizard: ' . ($should_show ? 'true' : 'false'));
+            
+            return $should_show;
         }
         
         /**
@@ -107,16 +120,33 @@ if (!class_exists('WooFacturaComSetupWizard')) {
         }
         
         /**
-         * Controlador principal del wizard
+         * Controlador principal del wizard - MEJORADO
          */
         public function setup_wizard() {
+            // Solo procesar en la página correcta
+            if (!isset($_GET['page']) || $_GET['page'] !== 'woo-factura-com-setup') {
+                return;
+            }
+            
             $this->current_step = isset($_GET['step']) ? sanitize_key($_GET['step']) : 'welcome';
             
-            // Procesar formulario si se envió
-            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($this->steps[$this->current_step]['handler'])) {
-                $handler = $this->steps[$this->current_step]['handler'];
-                if (is_callable($handler)) {
-                    call_user_func($handler);
+            // DEBUG: Verificar si se está procesando POST
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                error_log('WooFacturaCom Setup: Procesando POST para step: ' . $this->current_step);
+                error_log('POST data: ' . print_r($_POST, true));
+                
+                if (isset($this->steps[$this->current_step]['handler'])) {
+                    $handler = $this->steps[$this->current_step]['handler'];
+                    if (is_callable($handler)) {
+                        error_log('WooFacturaCom Setup: Ejecutando handler para step: ' . $this->current_step);
+                        call_user_func($handler);
+                    } else {
+                        error_log('WooFacturaCom Setup: Handler no callable para step: ' . $this->current_step);
+                    }
+                } else {
+                    error_log('WooFacturaCom Setup: No hay handler para step: ' . $this->current_step);
+                    // Si no hay handler específico, ir al siguiente paso
+                    $this->redirect_to_next_step();
                 }
             }
             
@@ -163,6 +193,7 @@ if (!class_exists('WooFacturaComSetupWizard')) {
                     .feature-list { list-style: none; padding: 0; }
                     .feature-list li { padding: 8px 0; }
                     .feature-list li:before { content: "✅"; margin-right: 10px; }
+                    .loading { opacity: 0.6; pointer-events: none; }
                 </style>
             </head>
             <body>
@@ -184,6 +215,39 @@ if (!class_exists('WooFacturaComSetupWizard')) {
                         <?php $this->render_actions(); ?>
                     </div>
                 </div>
+                
+                <script>
+                jQuery(document).ready(function($) {
+                    console.log('WooFacturaCom Setup Wizard cargado - Step:', '<?php echo $this->current_step; ?>');
+                    
+                    // Debug para formularios
+                    $('form').on('submit', function(e) {
+                        console.log('Enviando formulario:', this);
+                        console.log('Action:', $(this).attr('action'));
+                        console.log('Method:', $(this).attr('method'));
+                        
+                        var formData = $(this).serialize();
+                        console.log('Form data:', formData);
+                        
+                        // Verificar que tenemos los campos necesarios
+                        if (!formData.includes('_wpnonce')) {
+                            console.error('¡Falta nonce de seguridad!');
+                            alert('Error: Falta token de seguridad. Recarga la página.');
+                            e.preventDefault();
+                            return false;
+                        }
+                        
+                        // Mostrar loading
+                        $(this).find('button[type="submit"]').prop('disabled', true).text('Procesando...');
+                        $('.woo-factura-com-setup').addClass('loading');
+                    });
+                    
+                    // Debug para botones
+                    $('button[type="submit"]').on('click', function() {
+                        console.log('Botón presionado:', $(this).attr('name'), '=', $(this).val());
+                    });
+                });
+                </script>
                 
                 <?php wp_print_footer_scripts(); ?>
             </body>
@@ -222,7 +286,7 @@ if (!class_exists('WooFacturaComSetupWizard')) {
         }
         
         /**
-         * Renderizar botones de acción
+         * Renderizar botones de acción - MEJORADO
          */
         private function render_actions() {
             $step_keys = array_keys($this->steps);
@@ -234,13 +298,14 @@ if (!class_exists('WooFacturaComSetupWizard')) {
                 echo '<a href="' . esc_url($this->get_step_url($prev_step)) . '" class="button button-secondary">' . __('Anterior', 'woo-factura-com') . '</a>';
             }
             
-            // Botón saltar/siguiente
+            // Botón siguiente/continuar
             if ($this->current_step === 'complete') {
                 echo '<a href="' . admin_url('admin.php?page=woo-factura-com') . '" class="button button-primary">' . __('Ir a Configuración', 'woo-factura-com') . '</a>';
             } elseif ($this->current_step === 'test') {
-                echo '<button type="submit" class="button button-primary">' . __('Probar Configuración', 'woo-factura-com') . '</button>';
+                echo '<button type="submit" class="button button-primary" name="test_config" value="1">' . __('Probar Configuración', 'woo-factura-com') . '</button>';
             } else {
-                echo '<button type="submit" class="button button-primary">' . __('Continuar', 'woo-factura-com') . '</button>';
+                // FIX: Especificar name y value para todos los botones de continuar
+                echo '<button type="submit" class="button button-primary" name="continue" value="1">' . __('Continuar', 'woo-factura-com') . '</button>';
             }
             
             // Botón saltar wizard
@@ -271,17 +336,23 @@ if (!class_exists('WooFacturaComSetupWizard')) {
         }
         
         /**
-         * Redirigir al siguiente paso
+         * Redirigir al siguiente paso - MEJORADO
          */
         private function redirect_to_next_step() {
-            wp_redirect($this->get_step_url($this->get_next_step()));
+            $next_step = $this->get_next_step();
+            $redirect_url = $this->get_step_url($next_step);
+            
+            error_log('WooFacturaCom Setup: Redirigiendo de ' . $this->current_step . ' a ' . $next_step);
+            error_log('WooFacturaCom Setup: URL de redirección: ' . $redirect_url);
+            
+            wp_redirect($redirect_url);
             exit;
         }
         
         // ============== PASOS DEL WIZARD ==============
         
         /**
-         * Paso 1: Bienvenida
+         * Paso 1: Bienvenida - CORREGIDO
          */
         public function step_welcome() {
             ?>
@@ -311,8 +382,10 @@ if (!class_exists('WooFacturaComSetupWizard')) {
                 </ul>
             </div>
             
+            <!-- FIX: Agregar action explícito y campo hidden para continuar -->
             <form method="post" action="<?php echo esc_url($this->get_step_url($this->current_step)); ?>">
                 <?php wp_nonce_field('woo_factura_com_setup'); ?>
+                <input type="hidden" name="continue" value="1">
             </form>
             <?php
         }
@@ -394,6 +467,7 @@ if (!class_exists('WooFacturaComSetupWizard')) {
                 
                 <form method="post" action="<?php echo esc_url($this->get_step_url($this->current_step)); ?>">
                     <?php wp_nonce_field('woo_factura_com_setup'); ?>
+                    <input type="hidden" name="continue" value="1">
                 </form>
                 <?php
             } else {
@@ -543,6 +617,7 @@ if (!class_exists('WooFacturaComSetupWizard')) {
             
             <form method="post" action="<?php echo esc_url($this->get_step_url($this->current_step)); ?>">
                 <?php wp_nonce_field('woo_factura_com_setup'); ?>
+                <input type="hidden" name="test_config" value="1">
             </form>
             <?php
         }
@@ -583,6 +658,20 @@ if (!class_exists('WooFacturaComSetupWizard')) {
         }
         
         // ============== HANDLERS ==============
+        
+        /**
+         * NUEVO: Handler para el paso welcome
+         */
+        public function save_welcome() {
+            if (!wp_verify_nonce($_POST['_wpnonce'], 'woo_factura_com_setup')) {
+                wp_die(__('Error de seguridad', 'woo-factura-com'));
+            }
+            
+            if (isset($_POST['continue'])) {
+                error_log('WooFacturaCom Setup: Continuando desde welcome');
+                $this->redirect_to_next_step();
+            }
+        }
         
         /**
          * Guardar configuración de entorno
@@ -657,8 +746,8 @@ if (!class_exists('WooFacturaComSetupWizard')) {
             
             $demo_mode = get_option('woo_factura_com_demo_mode', 'yes') === 'yes';
             
-            if ($demo_mode) {
-                // En modo demo, simplemente continuar
+            if ($demo_mode || isset($_POST['test_config'])) {
+                // En modo demo o si se presionó el botón de prueba, continuar
                 $this->redirect_to_next_step();
                 return;
             }
