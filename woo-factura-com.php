@@ -84,3 +84,5 @@ add_filter('plugin_row_meta', function($links, $file) {
     }
     return $links;
 }, 10, 2);
+
+require_once WOO_FACTURA_COM_PLUGIN_DIR . 'debug-factura.php';
