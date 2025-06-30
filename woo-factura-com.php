@@ -16,12 +16,11 @@
  * WC tested up to: 8.5
  */
 
-// Evitar acceso directo
 if (!defined('ABSPATH')) {
     exit;
 }
 
-// Verificar si WooCommerce está activo
+// Verificar WooCommerce
 if (!in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
     add_action('admin_notices', function() {
         echo '<div class="notice notice-error"><p>';
@@ -48,7 +47,7 @@ if (!defined('WOO_FACTURA_COM_PLUGIN_BASENAME')) {
     define('WOO_FACTURA_COM_PLUGIN_BASENAME', plugin_basename(__FILE__));
 }
 
-// Cargar clase principal solo si existe
+// Cargar clase principal
 $main_class_file = WOO_FACTURA_COM_PLUGIN_DIR . 'includes/class-woo-factura-com.php';
 if (file_exists($main_class_file)) {
     require_once $main_class_file;
@@ -61,7 +60,13 @@ if (file_exists($main_class_file)) {
     return;
 }
 
-// Inicializar plugin cuando WordPress esté listo
+// ✅ CARGAR API POS (NUEVO)
+$pos_api_file = WOO_FACTURA_COM_PLUGIN_DIR . 'includes/class-pos-api.php';
+if (file_exists($pos_api_file)) {
+    require_once $pos_api_file;
+}
+
+// Inicializar plugin
 add_action('plugins_loaded', 'woo_factura_com_init');
 function woo_factura_com_init() {
     if (class_exists('WooFacturaCom')) {
@@ -78,6 +83,12 @@ function woo_factura_com_activate() {
         if (class_exists('WooFacturaComInstaller')) {
             WooFacturaComInstaller::activate();
         }
+    }
+    
+    // ✅ GENERAR TOKEN API AL ACTIVAR (NUEVO)
+    if (!get_option('woo_factura_com_pos_api_token')) {
+        $token = bin2hex(random_bytes(32));
+        update_option('woo_factura_com_pos_api_token', $token);
     }
 }
 
@@ -107,100 +118,217 @@ add_action('before_woocommerce_init', function() {
 add_filter('plugin_action_links_' . plugin_basename(__FILE__), function($links) {
     $settings_link = '<a href="' . esc_url(admin_url('admin.php?page=woo-factura-com')) . '">' . 
                     esc_html__('Configuración', 'woo-factura-com') . '</a>';
-    array_unshift($links, $settings_link);
+    
+    // ✅ ENLACE A DOCUMENTACIÓN API (NUEVO)
+    $api_link = '<a href="' . esc_url(admin_url('admin.php?page=woo-factura-com-api')) . '" style="color: #0073aa;">' . 
+               esc_html__('API POS', 'woo-factura-com') . '</a>';
+    
+    array_unshift($links, $settings_link, $api_link);
     return $links;
 });
 
-add_filter('plugin_row_meta', function($links, $file) {
-    if ($file === plugin_basename(__FILE__)) {
-        $links[] = '<a href="https://factura.com" target="_blank">' . 
-                  esc_html__('Factura.com', 'woo-factura-com') . '</a>';
-        $links[] = '<a href="https://github.com/BlackRubick/woo-factura-com/issues" target="_blank">' . 
-                  esc_html__('Soporte', 'woo-factura-com') . '</a>';
-    }
-    return $links;
-}, 10, 2);
-
-// =====================================================
-// FUNCIONES DEMO Y DEBUG (Solo si está habilitado)
-// =====================================================
-
-// Status notice en admin
-add_action('admin_notices', 'woo_factura_com_status_notice');
-function woo_factura_com_status_notice() {
-    if (!current_user_can('manage_options')) return;
-    
-    $demo_mode = get_option('woo_factura_com_demo_mode');
-    $cfdi_manager_exists = class_exists('WooFacturaComRealCFDIManager');
-    
-    echo '<div class="notice notice-info" style="border-left: 4px solid #667eea;">';
-    echo '<p><strong>🧾 ' . esc_html__('Factura.com Status', 'woo-factura-com') . ':</strong></p>';
-    echo '<ul style="margin: 10px 0 10px 20px;">';
-    echo '<li>' . esc_html__('Demo Mode', 'woo-factura-com') . ': ' . 
-         ($demo_mode === 'yes' ? '<span style="color:green;">✅ ' . esc_html__('Activo', 'woo-factura-com') . '</span>' : 
-                                '<span style="color:red;">❌ ' . esc_html__('Inactivo', 'woo-factura-com') . '</span>') . '</li>';
-    echo '<li>' . esc_html__('CFDI Manager', 'woo-factura-com') . ': ' . 
-         ($cfdi_manager_exists ? '<span style="color:green;">✅ ' . esc_html__('Cargado', 'woo-factura-com') . '</span>' : 
-                                '<span style="color:red;">❌ ' . esc_html__('No encontrado', 'woo-factura-com') . '</span>') . '</li>';
-    echo '<li>WooCommerce: ' . 
-         (class_exists('WooCommerce') ? '<span style="color:green;">✅ ' . esc_html__('Activo', 'woo-factura-com') . '</span>' : 
-                                      '<span style="color:red;">❌ ' . esc_html__('Inactivo', 'woo-factura-com') . '</span>') . '</li>';
-    echo '</ul>';
-    
-    if ($demo_mode !== 'yes') {
-        echo '<p><button type="button" class="button button-primary" onclick="wooFacturaActivarDemo()">🚀 ' . 
-             esc_html__('Activar Modo Demo', 'woo-factura-com') . '</button></p>';
-        
-        echo '<script>
-        function wooFacturaActivarDemo() {
-            if (confirm("' . esc_js(__('¿Activar modo demo?', 'woo-factura-com')) . '")) {
-                fetch("' . esc_url(admin_url('admin-ajax.php')) . '", {
-                    method: "POST",
-                    headers: {"Content-Type": "application/x-www-form-urlencoded"},
-                    body: "action=activar_demo_factura&nonce=' . wp_create_nonce('activar_demo') . '"
-                }).then(response => response.json()).then(data => {
-                    if (data.success) {
-                        alert("' . esc_js(__('Modo demo activado', 'woo-factura-com')) . '");
-                        location.reload();
-                    } else {
-                        alert("' . esc_js(__('Error:', 'woo-factura-com')) . ' " + data.data);
-                    }
-                }).catch(err => {
-                    alert("' . esc_js(__('Error de conexión', 'woo-factura-com')) . '");
-                });
-            }
-        }
-        </script>';
-    }
-    echo '</div>';
-}
-
-// AJAX para activar demo
-add_action('wp_ajax_activar_demo_factura', 'woo_factura_com_ajax_activar_demo');
-function woo_factura_com_ajax_activar_demo() {
-    check_ajax_referer('activar_demo', 'nonce');
-    
-    if (!current_user_can('manage_options')) {
-        wp_send_json_error(__('Sin permisos', 'woo-factura-com'));
-    }
-    
-    $demo_options = array(
-        'woo_factura_com_demo_mode' => 'yes',
-        'woo_factura_com_add_rfc_field' => 'yes',
-        'woo_factura_com_setup_completed' => true,
-        'woo_factura_com_sandbox_mode' => 'yes',
-        'woo_factura_com_lugar_expedicion' => '44100',
-        'woo_factura_com_uso_cfdi' => 'G01',
-        'woo_factura_com_forma_pago' => '99',
-        'woo_factura_com_metodo_pago' => 'PUE'
+// ✅ PÁGINA DE DOCUMENTACIÓN API EN ADMIN (NUEVO)
+add_action('admin_menu', 'woo_factura_com_add_api_page');
+function woo_factura_com_add_api_page() {
+    add_submenu_page(
+        'woocommerce',
+        __('API POS - Factura.com', 'woo-factura-com'),
+        __('API POS', 'woo-factura-com'),
+        'manage_woocommerce',
+        'woo-factura-com-api',
+        'woo_factura_com_api_page'
     );
+}
+
+function woo_factura_com_api_page() {
+    $api_token = get_option('woo_factura_com_pos_api_token');
+    $site_url = get_site_url();
+    ?>
+    <div class="wrap">
+        <h1>🔌 API POS - WooCommerce Factura.com</h1>
+        <p>Documentación para integrar tu POS con el sistema de CFDIs.</p>
+        
+        <div style="background: #f0f8ff; border: 1px solid #b3d9ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <h2>🔑 Credenciales de API</h2>
+            <p><strong>Base URL:</strong> <code><?php echo esc_html($site_url); ?>/wp-json/woo-factura-com/v1</code></p>
+            <p><strong>Token:</strong> <code><?php echo esc_html($api_token); ?></code></p>
+            <p><em>Usa este token en el header: <code>Authorization: Bearer <?php echo esc_html($api_token); ?></code></em></p>
+            
+            <button type="button" onclick="regenerarToken()" class="button">🔄 Regenerar Token</button>
+        </div>
+        
+        <div style="background: white; border: 1px solid #ddd; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <h2>📋 Endpoints Disponibles</h2>
+            
+            <h3>1. Crear CFDI</h3>
+            <p><code>POST /cfdi/create</code></p>
+            <pre style="background: #f5f5f5; padding: 10px; overflow-x: auto;">
+curl -X POST "<?php echo esc_html($site_url); ?>/wp-json/woo-factura-com/v1/cfdi/create" \
+  -H "Authorization: Bearer <?php echo esc_html($api_token); ?>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "order_data": {
+      "items": [
+        {
+          "name": "Producto A",
+          "price": 100.00,
+          "quantity": 2,
+          "sku": "PROD-001"
+        }
+      ]
+    },
+    "customer_data": {
+      "first_name": "Juan",
+      "last_name": "Pérez",
+      "email": "juan@ejemplo.com",
+      "rfc": "PERJ800101AAA"
+    }
+  }'</pre>
+            
+            <h3>2. Verificar Estado de CFDI</h3>
+            <p><code>GET /cfdi/status/{order_id}</code></p>
+            <pre style="background: #f5f5f5; padding: 10px; overflow-x: auto;">
+curl "<?php echo esc_html($site_url); ?>/wp-json/woo-factura-com/v1/cfdi/status/123" \
+  -H "Authorization: Bearer <?php echo esc_html($api_token); ?>"</pre>
+            
+            <h3>3. Imprimir CFDI</h3>
+            <p><code>POST /cfdi/print/{uuid}</code></p>
+            <pre style="background: #f5f5f5; padding: 10px; overflow-x: auto;">
+curl -X POST "<?php echo esc_html($site_url); ?>/wp-json/woo-factura-com/v1/cfdi/print/550e8400-e29b-41d4-a716-446655440000" \
+  -H "Authorization: Bearer <?php echo esc_html($api_token); ?>"</pre>
+        </div>
+        
+        <div style="background: #f9f9f9; border: 1px solid #ddd; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <h2>🧪 Probar API</h2>
+            <p>Usa estos botones para probar la API directamente:</p>
+            
+            <button type="button" onclick="probarCrearCFDI()" class="button button-primary">🧾 Probar Crear CFDI</button>
+            <button type="button" onclick="probarVerificarCFDI()" class="button">🔍 Verificar Último CFDI</button>
+            
+            <div id="api-test-result" style="margin-top: 15px; padding: 10px; background: white; border: 1px solid #ddd; border-radius: 4px; display: none;">
+                <h4>Resultado:</h4>
+                <pre id="api-result-content"></pre>
+            </div>
+        </div>
+    </div>
     
-    foreach ($demo_options as $option => $value) {
-        update_option($option, $value);
+    <script>
+    function regenerarToken() {
+        if (confirm('¿Regenerar token de API? Esto invalidará el token actual.')) {
+            fetch('<?php echo admin_url('admin-ajax.php'); ?>', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'action=regenerar_api_token&nonce=<?php echo wp_create_nonce('regenerar_token'); ?>'
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Token regenerado: ' + data.data.token);
+                    location.reload();
+                } else {
+                    alert('Error: ' + data.data);
+                }
+            });
+        }
     }
     
-    wp_send_json_success(__('Demo activado correctamente', 'woo-factura-com'));
+    function probarCrearCFDI() {
+        const testData = {
+            order_data: {
+                items: [
+                    {
+                        name: "Producto de Prueba API",
+                        price: 100.00,
+                        quantity: 1,
+                        sku: "TEST-API-001"
+                    }
+                ]
+            },
+            customer_data: {
+                first_name: "Cliente",
+                last_name: "Prueba API",
+                email: "test@api.com",
+                rfc: "XAXX010101000"
+            }
+        };
+        
+        fetch('<?php echo esc_url($site_url); ?>/wp-json/woo-factura-com/v1/cfdi/create', {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer <?php echo esc_js($api_token); ?>',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(testData)
+        })
+        .then(r => r.json())
+        .then(data => {
+            document.getElementById('api-test-result').style.display = 'block';
+            document.getElementById('api-result-content').textContent = JSON.stringify(data, null, 2);
+        })
+        .catch(err => {
+            document.getElementById('api-test-result').style.display = 'block';
+            document.getElementById('api-result-content').textContent = 'Error: ' + err.message;
+        });
+    }
+    
+    function probarVerificarCFDI() {
+        // Obtener el último pedido para probar
+        fetch('<?php echo admin_url('admin-ajax.php'); ?>?action=get_last_order_id', {
+            method: 'GET'
+        })
+        .then(r => r.json())
+        .then(orderData => {
+            if (orderData.success && orderData.data.order_id) {
+                return fetch(`<?php echo esc_url($site_url); ?>/wp-json/woo-factura-com/v1/cfdi/status/${orderData.data.order_id}`, {
+                    headers: {
+                        'Authorization': 'Bearer <?php echo esc_js($api_token); ?>'
+                    }
+                });
+            } else {
+                throw new Error('No hay pedidos para verificar');
+            }
+        })
+        .then(r => r.json())
+        .then(data => {
+            document.getElementById('api-test-result').style.display = 'block';
+            document.getElementById('api-result-content').textContent = JSON.stringify(data, null, 2);
+        })
+        .catch(err => {
+            document.getElementById('api-test-result').style.display = 'block';
+            document.getElementById('api-result-content').textContent = 'Error: ' + err.message;
+        });
+    }
+    </script>
+    <?php
 }
+
+// AJAX para regenerar token
+add_action('wp_ajax_regenerar_api_token', function() {
+    check_ajax_referer('regenerar_token', 'nonce');
+    
+    if (!current_user_can('manage_woocommerce')) {
+        wp_send_json_error('Sin permisos');
+    }
+    
+    $new_token = bin2hex(random_bytes(32));
+    update_option('woo_factura_com_pos_api_token', $new_token);
+    
+    wp_send_json_success(['token' => $new_token]);
+});
+
+// AJAX para obtener último pedido (para pruebas)
+add_action('wp_ajax_get_last_order_id', function() {
+    if (!current_user_can('manage_woocommerce')) {
+        wp_send_json_error('Sin permisos');
+    }
+    
+    $orders = wc_get_orders(['limit' => 1]);
+    if (!empty($orders)) {
+        wp_send_json_success(['order_id' => $orders[0]->get_id()]);
+    } else {
+        wp_send_json_error('No hay pedidos');
+    }
+});
 
 // Funciones de utilidad (solo definir si no existen)
 if (!function_exists('woo_factura_generate_uuid')) {
@@ -223,33 +351,5 @@ if (!function_exists('woo_factura_debug_log')) {
             }
             error_log($log_message);
         }
-    }
-}
-
-// Debug info en footer (solo si está habilitado el debug)
-if (defined('WP_DEBUG') && WP_DEBUG) {
-    add_action('wp_footer', 'woo_factura_com_debug_footer');
-    function woo_factura_com_debug_footer() {
-        if (current_user_can('manage_options') && isset($_GET['woo_factura_debug'])) {
-            echo '<!-- WooFactura.com Debug Info -->';
-            echo '<script>console.log("WooFactura.com Debug:", ' . json_encode(array(
-                'version' => WOO_FACTURA_COM_VERSION,
-                'demo_mode' => get_option('woo_factura_com_demo_mode'),
-                'plugin_dir' => WOO_FACTURA_COM_PLUGIN_DIR,
-                'wc_active' => class_exists('WooCommerce')
-            )) . ');</script>';
-        }
-    }
-}
-
-// Log de debug en admin_init
-add_action('admin_init', 'woo_factura_com_debug_init');
-function woo_factura_com_debug_init() {
-    if (current_user_can('manage_options') && WP_DEBUG) {
-        error_log('=== Factura.com Debug Init ===');
-        error_log('Demo mode: ' . get_option('woo_factura_com_demo_mode', 'NOT_SET'));
-        error_log('CFDI Manager: ' . (class_exists('WooFacturaComRealCFDIManager') ? 'EXISTS' : 'MISSING'));
-        error_log('WooCommerce: ' . (class_exists('WooCommerce') ? 'EXISTS' : 'MISSING'));
-        error_log('================================');
     }
 }
